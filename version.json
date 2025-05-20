@@ -1,0 +1,9 @@
+{
+  "plugin": "MepConnector",
+  "version": "0.0.0",
+  "timestamp": "2025-05-20T09:10:40.373555",
+  "packages": {
+    "JetBrains.Annotations": "2025.1.0-eap1",
+    "Revit_All_Main_Versions_API_x64": "2021.1.9"
+  }
+}
