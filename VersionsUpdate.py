@@ -61,7 +61,7 @@ def append_version_block_to_notion(data):
     github_repo = os.getenv("GITHUB_REPOSITORY", "user/repo")
     release_tag = os.getenv("GITHUB_REF_NAME", "latest")
     github_link = f"https://github.com/{github_repo}/releases/tag/{release_tag}"
-    download_link = "linkToSeaFile1"
+    download_link = "linkToSeaFile"
 
     quote_block = {
         "object": "block",
