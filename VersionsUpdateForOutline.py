@@ -121,6 +121,9 @@ def upload_to_seafile(file_path):
             }
 
             share_response = requests.post(share_link_url, headers=share_headers, json=share_data)
+            print("🔁 Share link status:", share_response.status_code)
+            print("🔁 Share link raw response:", share_response.text)
+
             share_result = share_response.json()
 
             print("🔗 Share link created:", share_result)
