@@ -118,7 +118,7 @@ def upload_to_seafile(file_path):
                 }
             }
             share_headers = {
-                "Authorization": f"Bearer {token}",  # <== ОБЯЗАТЕЛЬНО "Bearer", не "Token"
+                "Authorization": f"Token {token}",  # ✅ <== ОБЯЗАТЕЛЬНО "Token"
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             }
