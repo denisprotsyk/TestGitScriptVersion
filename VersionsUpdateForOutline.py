@@ -143,9 +143,9 @@ def append_version_block_to_outline(data, download_link):
     github_link = f"https://github.com/{GITHUB_REPOSITORY}/releases/tag/{GITHUB_REF_NAME}"
 
     quote_block = "\n".join([
-        f"> **Published date:** {publish_date}",
-        f"> **Link GitHub:** {github_link}",
-        f"> **Download:** `{download_link}`",
+        f"> **Published date:** {publish_date}\n",
+        f"> **Link GitHub:** [Open]({github_link})\n",
+        f"> **Download:** [Open]({download_link})",
     ])
 
     package_lines = "\n".join([
