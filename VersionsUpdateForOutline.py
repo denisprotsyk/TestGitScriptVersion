@@ -109,15 +109,18 @@ def upload_to_seafile(file_path):
             file_name = upload_result[0].get("name")
 
             # 👉 Теперь создаём публичную ссылку
-            share_link_url = f"{SEAFILE_HOST}/api2/share-links/"
+            share_link_url = f"{SEAFILE_HOST}/api/v2.1/share-links/"
             share_data = {
                 "repo_id": SEAFILE_REPO_ID,
                 "path": f"/{file_name}",
-                "permissions": "download"
+                "permissions": {
+                    "can_download": True
+                }
             }
             share_headers = {
-                "Authorization": f"Token {token}",
-                "Content-Type": "application/json"
+                "Authorization": f"Bearer {token}",  # <== ОБЯЗАТЕЛЬНО "Bearer", не "Token"
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             }
 
             share_response = requests.post(share_link_url, headers=share_headers, json=share_data)
@@ -125,9 +128,6 @@ def upload_to_seafile(file_path):
             print("🔁 Share link raw response:", share_response.text)
 
             share_result = share_response.json()
-
-            print("🔗 Share link created:", share_result)
-
             return share_result["link"]
 
         else:
