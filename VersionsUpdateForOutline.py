@@ -92,7 +92,7 @@ def upload_to_seafile(file_path):
         data = {'parent_dir': '/', 'replace': '1'}
         upload_response = requests.post(f"{upload_link}?ret-json=1", data=data, files=files)
         upload_result = upload_response.json()
-        return f"{SEAFILE_HOST}{upload_result['url']}"
+        return f"{SEAFILE_HOST}{upload_result[0]['url']}"
 
 def append_version_block_to_outline(data, download_link):
     version = data["version"]
