@@ -19,10 +19,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install notion-client
+          pip install http.client
 
       - name: Run version script
         env:
-          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-          NOTION_PAGE_ID: ${{ secrets.NOTION_PAGE_ID }}
-        run: python VersionsUpdate.py
+          OUTLINE_TOKEN: ${{ secrets.OUTLINE_TOKEN }}
+          OUTLINE_PAGE_ID: ${{ secrets.OUTLINE_PAGE_ID }}
+          OUTLINE_HOST: ${{ secrets.OUTLINE_HOST }}
+        run: python VersionsUpdateForOutline.py
