@@ -67,15 +67,23 @@ def download_github_release_asset():
 
     for asset in release.get("assets", []):
         if asset["name"].endswith(".msi"):
-            download_url = asset["browser_download_url"]
+            api_asset_url = asset["url"]  # 👈 это API URL, а не browser_download_url
             local_path = asset["name"]
-            r = requests.get(download_url, headers={
+
+            r = requests.get(api_asset_url, headers={
                 "Authorization": f"token {GITHUB_TOKEN}",
                 "Accept": "application/octet-stream"
             })
+
+            print(f"⬇ Downloaded {asset['name']} — {len(r.content)} bytes")
+
             with open(local_path, "wb") as f:
                 f.write(r.content)
+
+            print(f"✅ Saved MSI file: {local_path}, size: {os.path.getsize(local_path)} bytes")
+
             return local_path
+
     raise FileNotFoundError("MSI asset not found in release.")
 
 def upload_to_seafile(file_path):
