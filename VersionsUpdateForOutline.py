@@ -106,9 +106,27 @@ def upload_to_seafile(file_path):
         print("📦 Seafile upload response:", upload_result)
 
         if isinstance(upload_result, list) and upload_result:
-            file_id = upload_result[0].get("id")
             file_name = upload_result[0].get("name")
-            return f"{SEAFILE_HOST}/seafhttp/files/{file_id}/{file_name}"
+
+            # 👉 Теперь создаём публичную ссылку
+            share_link_url = f"{SEAFILE_HOST}/api2/share-links/"
+            share_data = {
+                "repo_id": SEAFILE_REPO_ID,
+                "path": f"/{file_name}",
+                "permissions": "download"
+            }
+            share_headers = {
+                "Authorization": f"Token {token}",
+                "Content-Type": "application/json"
+            }
+
+            share_response = requests.post(share_link_url, headers=share_headers, json=share_data)
+            share_result = share_response.json()
+
+            print("🔗 Share link created:", share_result)
+
+            return share_result["link"]
+
         else:
             raise ValueError("❌ Unexpected response from Seafile")
 
