@@ -18,9 +18,9 @@ GITHUB_REPOSITORY = os.getenv("GITHUB_REPOSITORY", "user/repo")
 GITHUB_REF_NAME = os.getenv("GITHUB_REF_NAME", "latest")
 
 # Seafile
-SEAFILE_USERNAME = os.environ["it@bim-prove.com"]
-SEAFILE_PASSWORD = os.environ["BIMproveDev1"]
-SEAFILE_REPO_ID = os.environ["d57a61c0-5532-4910-88a2-99fa457fe7af"]
+SEAFILE_USERNAME = "it@bim-prove.com"
+SEAFILE_PASSWORD = "BIMproveDev1"
+SEAFILE_REPO_ID = "d57a61c0-5532-4910-88a2-99fa457fe7af"
 SEAFILE_HOST = "https://cloud.bim-prove.com.ua"
 
 
