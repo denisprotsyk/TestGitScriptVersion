@@ -67,7 +67,7 @@ def download_github_release_asset():
 
     for asset in release.get("assets", []):
         if asset["name"].endswith(".msi"):
-            api_asset_url = asset["url"]  # 👈 это API URL, а не browser_download_url
+            api_asset_url = asset["url"]
             local_path = asset["name"]
 
             r = requests.get(api_asset_url, headers={
@@ -108,7 +108,6 @@ def upload_to_seafile(file_path):
         if isinstance(upload_result, list) and upload_result:
             file_name = upload_result[0].get("name")
 
-            # 👉 Теперь создаём публичную ссылку
             share_link_url = f"{SEAFILE_HOST}/api/v2.1/share-links/"
             share_data = {
                 "repo_id": SEAFILE_REPO_ID,
@@ -118,7 +117,7 @@ def upload_to_seafile(file_path):
                 }
             }
             share_headers = {
-                "Authorization": f"Token {token}",  # ✅ <== ОБЯЗАТЕЛЬНО "Token"
+                "Authorization": f"Token {token}",
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             }
@@ -145,7 +144,7 @@ def append_version_block_to_outline(data, download_link):
     quote_block = "\n".join([
         f"> **Published date:** {publish_date}\n",
         f"> **Link GitHub:** [Open]({github_link})\n",
-        f"> **Download:** [Open]({download_link})",
+        f"> **Download:** [Open]({download_link})" if download_link else "None",
     ])
 
     package_lines = "\n".join([
@@ -188,22 +187,26 @@ def append_version_block_to_outline(data, download_link):
 def main():
     csproj_files = find_csproj_files(".")
     if not csproj_files:
-        print("🚫 No .csproj files found")
+        print("No .csproj files found")
         return
 
-    print(f"📁 Found .csproj file: {csproj_files[0]}")
+    print(f"Found .csproj file: {csproj_files[0]}")
     data = parse_csproj(csproj_files[0])
 
-    print("⬇ Downloading MSI from GitHub...")
-    msi_file = download_github_release_asset()
+    try:
+        print("Downloading MSI from GitHub...")
+        msi_file = download_github_release_asset()
 
-    print("⬆ Uploading to Seafile...")
-    download_link = upload_to_seafile(msi_file)
+        print("Uploading to Seafile...")
+        download_link = upload_to_seafile(msi_file)
+    except FileNotFoundError as e:
+        print(f"⚠️ {e}")
+        download_link = None
 
-    print("📝 Sending block to Outline...")
+    print("Sending block to Outline...")
     append_version_block_to_outline(data, download_link)
 
-    print("✅ Done")
+    print("Done")
 
 if __name__ == "__main__":
     main()
