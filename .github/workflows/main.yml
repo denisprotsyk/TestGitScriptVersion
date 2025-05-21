@@ -1,8 +1,9 @@
 name: Run version script on release
 
 on:
-  release:
-    types: [published, created, edited]
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   run-script:
