@@ -8,9 +8,9 @@ import http.client
 import requests
 
 # Outline
-OUTLINE_TOKEN = os.environ["OUTLINE_TOKEN"]
-OUTLINE_PAGE_ID = os.environ["OUTLINE_PAGE_ID"]
-OUTLINE_HOST = os.environ["OUTLINE_HOST"]
+OUTLINE_TOKEN = "ol_api_JSh21UxJ5vsvrb9oC2UaIaJS095qzQDHhZyR09"
+OUTLINE_PAGE_ID = "RpUtdxc1IA"
+OUTLINE_HOST = "outline.bim-prove.com.ua"
 
 # GitHub
 GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
