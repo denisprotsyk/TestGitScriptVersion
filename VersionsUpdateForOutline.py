@@ -69,7 +69,10 @@ def download_github_release_asset():
         if asset["name"].endswith(".msi"):
             download_url = asset["browser_download_url"]
             local_path = asset["name"]
-            r = requests.get(download_url, headers=headers)
+            r = requests.get(download_url, headers={
+                "Authorization": f"token {GITHUB_TOKEN}",
+                "Accept": "application/octet-stream"
+            })
             with open(local_path, "wb") as f:
                 f.write(r.content)
             return local_path
