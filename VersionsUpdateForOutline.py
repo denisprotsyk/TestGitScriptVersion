@@ -22,6 +22,7 @@ SEAFILE_USERNAME = "it@bim-prove.com"
 SEAFILE_PASSWORD = "BIMproveDev1"
 SEAFILE_REPO_ID = "d57a61c0-5532-4910-88a2-99fa457fe7af"
 SEAFILE_HOST = "https://cloud.bim-prove.com.ua"
+UPLOAD_SUBDIR = '/BIMprove Add-Ins/DenisRocketPack'
 
 
 def find_csproj_files(root_dir):
@@ -100,7 +101,7 @@ def upload_to_seafile(file_path):
 
     with open(file_path, "rb") as file_obj:
         files = {'file': file_obj}
-        data = {'parent_dir': '/', 'replace': '1'}
+        data = {'parent_dir': UPLOAD_SUBDIR, 'replace': '1'}
         upload_response = requests.post(f"{upload_link}?ret-json=1", data=data, files=files)
         upload_result = upload_response.json()
         print("📦 Seafile upload response:", upload_result)
