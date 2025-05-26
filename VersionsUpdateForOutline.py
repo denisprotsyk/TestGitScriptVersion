@@ -95,7 +95,7 @@ def upload_to_seafile(file_path):
     auth_response = requests.post(auth_url, json=auth_payload, headers=auth_headers)
     token = auth_response.json()["token"]
 
-    upload_link_url = f"{SEAFILE_HOST}/api2/repos/{SEAFILE_REPO_ID}/upload-link/?p=/"
+    upload_link_url = f"{SEAFILE_HOST}/api2/repos/{SEAFILE_REPO_ID}/upload-link/?p={UPLOAD_SUBDIR}"
     headers = {"Authorization": f"Token {token}", "accept": "application/json"}
     upload_link = requests.get(upload_link_url, headers=headers).text.strip('"')
 
