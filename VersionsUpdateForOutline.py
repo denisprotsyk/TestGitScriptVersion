@@ -20,9 +20,9 @@ GITHUB_REF_NAME = os.getenv("GITHUB_REF_NAME", "latest")
 # Seafile
 SEAFILE_USERNAME = "it@bim-prove.com"
 SEAFILE_PASSWORD = "BIMproveDev1"
-SEAFILE_REPO_ID = "8116b2a4-27ae-4646-9b21-9d523a914f95"
+SEAFILE_REPO_ID = "d57a61c0-5532-4910-88a2-99fa457fe7af"
 SEAFILE_HOST = "https://cloud.bim-prove.com.ua"
-UPLOAD_SUBDIR = '/DenisRocketPack'
+UPLOAD_SUBDIR = '/1'
 
 
 def find_csproj_files(root_dir):
