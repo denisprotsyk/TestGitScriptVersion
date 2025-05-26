@@ -106,13 +106,9 @@ def upload_to_seafile(file_path):
         try:
             upload_result = upload_response.json()
         except Exception:
-            print("❌ Не удалось распарсить ответ от Seafile как JSON.")
-            print("=== Статус ===")
             print(upload_response.status_code)
-            print("=== Заголовки ===")
             print(upload_response.headers)
-            print("=== Ответ (обрезан) ===")
-            print(upload_response.text[:1000])  # первые 1000 символов для анализа
+            print(upload_response.text[:1000])
             raise
         print("📦 Seafile upload response:", upload_result)
 
@@ -124,7 +120,7 @@ def upload_to_seafile(file_path):
             return internal_url
 
         else:
-            raise ValueError("❌ Unexpected response from Seafile")
+            raise ValueError("Unexpected response from Seafile")
 
 def append_version_block_to_outline(data, download_link):
     version = data["version"]
