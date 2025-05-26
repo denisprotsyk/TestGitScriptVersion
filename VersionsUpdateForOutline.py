@@ -112,7 +112,7 @@ def upload_to_seafile(file_path):
             share_link_url = f"{SEAFILE_HOST}/api/v2.1/share-links/"
             share_data = {
                 "repo_id": SEAFILE_REPO_ID,
-                "path": f"/{file_name}",
+                "path": f"{UPLOAD_SUBDIR.rstrip('/')}/{file_name}",
                 "permissions": {
                     "can_download": True
                 }
