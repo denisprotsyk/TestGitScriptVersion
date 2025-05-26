@@ -119,7 +119,7 @@ def upload_to_seafile(file_path):
         if isinstance(upload_result, list) and upload_result:
             file_name = upload_result[0].get("name")
 
-            internal_url = f"{SEAFILE_HOST}/library/{SEAFILE_REPO_ID}{UPLOAD_SUBDIR}/{file_name}"
+            internal_url = f"{SEAFILE_HOST}/lib/{SEAFILE_REPO_ID}/file/{UPLOAD_SUBDIR}/{file_name}"
             print("🔗 Internal link:", internal_url)
             return internal_url
 
