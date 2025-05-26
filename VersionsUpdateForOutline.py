@@ -22,7 +22,7 @@ SEAFILE_USERNAME = "it@bim-prove.com"
 SEAFILE_PASSWORD = "BIMproveDev1"
 SEAFILE_REPO_ID = "d57a61c0-5532-4910-88a2-99fa457fe7af"
 SEAFILE_HOST = "https://cloud.bim-prove.com.ua"
-UPLOAD_SUBDIR = '/BIMprove Add-Ins/DenisRocketPack'
+UPLOAD_SUBDIR = '/DenisRocketPack'
 
 
 def find_csproj_files(root_dir):
