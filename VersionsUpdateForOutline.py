@@ -119,26 +119,9 @@ def upload_to_seafile(file_path):
         if isinstance(upload_result, list) and upload_result:
             file_name = upload_result[0].get("name")
 
-            share_link_url = f"{SEAFILE_HOST}/api/v2.1/share-links/"
-            share_data = {
-                "repo_id": SEAFILE_REPO_ID,
-                "path": f"{UPLOAD_SUBDIR.rstrip('/')}/{file_name}",
-                "permissions": {
-                    "can_download": True
-                }
-            }
-            share_headers = {
-                "Authorization": f"Token {token}",
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-
-            share_response = requests.post(share_link_url, headers=share_headers, json=share_data)
-            print("🔁 Share link status:", share_response.status_code)
-            print("🔁 Share link raw response:", share_response.text)
-
-            share_result = share_response.json()
-            return share_result["link"]
+            internal_url = f"{SEAFILE_HOST}/library/{SEAFILE_REPO_ID}{UPLOAD_SUBDIR}/{file_name}"
+            print("🔗 Internal link:", internal_url)
+            return internal_url
 
         else:
             raise ValueError("❌ Unexpected response from Seafile")
