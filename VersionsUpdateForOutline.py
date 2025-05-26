@@ -103,7 +103,17 @@ def upload_to_seafile(file_path):
         files = {'file': file_obj}
         data = {'parent_dir': UPLOAD_SUBDIR, 'replace': '1'}
         upload_response = requests.post(f"{upload_link}?ret-json=1", data=data, files=files)
-        upload_result = upload_response.json()
+        try:
+            upload_result = upload_response.json()
+        except Exception:
+            print("❌ Не удалось распарсить ответ от Seafile как JSON.")
+            print("=== Статус ===")
+            print(upload_response.status_code)
+            print("=== Заголовки ===")
+            print(upload_response.headers)
+            print("=== Ответ (обрезан) ===")
+            print(upload_response.text[:1000])  # первые 1000 символов для анализа
+            raise
         print("📦 Seafile upload response:", upload_result)
 
         if isinstance(upload_result, list) and upload_result:
