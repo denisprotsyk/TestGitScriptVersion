@@ -8,8 +8,8 @@ import http.client
 import requests
 
 # Outline
-OUTLINE_TOKEN = os.environ["OUTLINE_TOKEN"]
-OUTLINE_PAGE_ID = "RpUtdxc1IA"
+OUTLINE_TOKEN = "ol_api_JSh21UxJ5vsvrb9oC2UaIaJS095qzQDHhZyR09"
+OUTLINE_PAGE_ID = "GnAw7Ue6BE"
 OUTLINE_HOST = "outline.bim-prove.com.ua"
 
 # GitHub
@@ -18,15 +18,15 @@ GITHUB_REPOSITORY = os.getenv("GITHUB_REPOSITORY", "user/repo")
 GITHUB_REF_NAME = os.getenv("GITHUB_REF_NAME", "latest")
 
 # Seafile
-SEAFILE_USERNAME = os.environ["SEAFILE_USERNAME"]
-SEAFILE_PASSWORD = os.environ["SEAFILE_PASSWORD"]
+SEAFILE_USERNAME = "it@bim-prove.com"
+SEAFILE_PASSWORD = "BIMproveDev1"
 SEAFILE_REPO_ID = "8116b2a4-27ae-4646-9b21-9d523a914f95"
 SEAFILE_HOST = "https://cloud.bim-prove.com.ua"
-UPLOAD_SUBDIR = 'DenisRocketPack'
+UPLOAD_SUBDIR = 'Report Manager'
 
 
 def find_csproj_files(root_dir):
-    excluded_keywords = ["Install", "ClassLibrary"]
+    excluded_keywords = ["Install", "ClassLibrary", "Bcfier.Revit"]
     return [
         path for path in Path(root_dir).rglob("*.csproj")
         if not any(keyword in path.stem for keyword in excluded_keywords)
@@ -76,7 +76,7 @@ def download_github_release_asset():
                 "Accept": "application/octet-stream"
             })
 
-            print(f"⬇ Downloaded {asset['name']} — {len(r.content)} bytes")
+            print(f"⬇️ Downloaded {asset['name']} — {len(r.content)} bytes")
 
             with open(local_path, "wb") as f:
                 f.write(r.content)
@@ -135,12 +135,12 @@ def append_version_block_to_outline(data, download_link):
         f"> **Published date:** {publish_date}\n",
         f"> **Link GitHub:** [Open]({github_link})\n",
         f"> **Download:** [Open]({download_link})" if download_link else "",
-    ])
+    ]) + "\n"
 
     package_lines = "\n".join([
         f"- {name} `v{ver}`"
         for name, ver in packages.items()
-    ]) or "_No packages listed._"
+    ]) or "\n_No packages listed._"
 
     new_block = f""":::tip
 **{plugin}** `v{version}`
@@ -164,7 +164,7 @@ def append_version_block_to_outline(data, download_link):
 
     payload = json.dumps({
         "id": OUTLINE_PAGE_ID,
-        "title": plugin,
+        "title": UPLOAD_SUBDIR,
         "text": updated_text,
         "append": False,
         "publish": True,
