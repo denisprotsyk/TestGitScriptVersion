@@ -134,7 +134,7 @@ def append_version_block_to_outline(data, download_link):
     quote_block = "\n".join([
         f"> **Published date:** {publish_date}\n",
         f"> **Link GitHub:** [Open]({github_link})\n",
-        f"> **Download:** [Open]({download_link})" if download_link else "",
+        f"> **Download:** [Open](<{download_link}>)" if download_link else "",
     ]) + "\n"
 
     package_lines = "\n".join([
