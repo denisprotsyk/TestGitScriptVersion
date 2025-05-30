@@ -25,8 +25,8 @@ jobs:
       - name: Run version script
         env:
           OUTLINE_TOKEN: ${{ secrets.OUTLINE_TOKEN }}
-          OUTLINE_PAGE_ID: ${{ secrets.OUTLINE_PAGE_ID }}
-          OUTLINE_HOST: ${{ secrets.OUTLINE_HOST }}
+          SEAFILE_USERNAME: ${{ secrets.SEAFILE_USERNAME }}
+          SEAFILE_PASSWORD: ${{ secrets.SEAFILE_USERNAME }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_REF_NAME: ${{ github.ref_name }}

@@ -8,7 +8,7 @@ import http.client
 import requests
 
 # Outline
-OUTLINE_TOKEN = "ol_api_JSh21UxJ5vsvrb9oC2UaIaJS095qzQDHhZyR09"
+OUTLINE_TOKEN = os.environ["OUTLINE_TOKEN"]
 OUTLINE_PAGE_ID = "RpUtdxc1IA"
 OUTLINE_HOST = "outline.bim-prove.com.ua"
 
@@ -18,8 +18,8 @@ GITHUB_REPOSITORY = os.getenv("GITHUB_REPOSITORY", "user/repo")
 GITHUB_REF_NAME = os.getenv("GITHUB_REF_NAME", "latest")
 
 # Seafile
-SEAFILE_USERNAME = "it@bim-prove.com"
-SEAFILE_PASSWORD = "BIMproveDev1"
+SEAFILE_USERNAME = os.environ["SEAFILE_USERNAME"]
+SEAFILE_PASSWORD = os.environ["SEAFILE_PASSWORD"]
 SEAFILE_REPO_ID = "8116b2a4-27ae-4646-9b21-9d523a914f95"
 SEAFILE_HOST = "https://cloud.bim-prove.com.ua"
 UPLOAD_SUBDIR = 'DenisRocketPack'
